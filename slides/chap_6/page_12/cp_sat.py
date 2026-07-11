@@ -3,13 +3,9 @@ from ortools.sat.python import cp_model
 def main():
     pass
     # Input
-    m, n = map(int, input().split())
+    m, n, k = map(int, input().split())
     A = [list(map(int, input().split())) for _ in range(m)]
-    k = int(input())
-    B = []
-    for _ in range(k):
-        i, j = map(int, input().split())
-        B.append((i, j))
+    B = [tuple(map(int, input().split())) for _ in range(k)]
 
     # Model & Solver
     model = cp_model.CpModel()

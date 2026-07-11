@@ -4,13 +4,9 @@ from ortools.sat.python import cp_model
 def main():
     pass
     # Input
-    m, n = map(int, input().split())
+    m, n, k = map(int, input().split())
     A = [list(map(int, input().split())) for _ in range(m)]
-    k = int(input())
-    B = []
-    for _ in range(k):
-        i, j = map(int, input().split())
-        B.append((i, j))
+    B = [tuple(map(int, input().split())) for _ in range(k)]
 
     # Model & Solver
     model = cp_model.CpModel()
@@ -24,11 +20,12 @@ def main():
         for t in range(m):
             if A[t][c] == 1:
                 domain.append(t)
-        X[c] = model.NewIntVarFromDomain(cp_model.Domain.FromValues(domain), f"X_{c}")
+        X[c] = model.NewIntVarFromDomain(cp_model.Domain.FromValues(domain), f"X_{c}") 
     
-    Y = {} # Y[t]: Load cua giao vien t
+    Y = {}
     for t in range(m):
-        Y[t] = model.NewIntVar(0, n, f"Y_{t}")        
+        for c in range(n):
+            Y[t, c] = model.NewBoolVar(f"Y_{t}_{c}")  
         
     F = model.NewIntVar(0, n, "Z")
 
@@ -36,16 +33,18 @@ def main():
     for i, j in B:
         model.Add(X[i] != X[j])
     
-    # Rang buoc 2: Y[t] <= F
+    # Rang buoc 2: 
     for t in range(m):
-        gan_cho = []
         for c in range(n):
-            b = model.NewBoolVar(f"b_{t}_{c}")
-            model.Add(X[c] == t).OnlyEnforceIf(b)
-            model.Add(X[c] != t).OnlyEnforceIf(b.Not())
-            gan_cho.append(b)
-        model.Add(Y[t] == sum(gan_cho))
-        model.Add(Y[t] <= F)
+            model.Add(X[c] == t).OnlyEnforceIf(Y[t, c])
+            model.Add(X[c] != t).OnlyEnforceIf(Y[t, c].Not())
+            
+    # Rang buoc 3: 
+    for t in range(m):
+        cnt = 0
+        for c in range(n):
+            cnt += Y[t, c]
+        model.Add(cnt <= F)
 
     # Ham muc tieu
     model.Minimize(F)  # ["Minimize", "Maximize"]

@@ -4,13 +4,9 @@ from ortools.linear_solver import pywraplp
 def main():
     pass
     # Input
-    m, n = map(int, input().split())
+    m, n, k = map(int, input().split())
     A = [list(map(int, input().split())) for _ in range(m)]
-    k = int(input())
-    B = []
-    for _ in range(k):
-        i, j = map(int, input().split())
-        B.append((i, j))
+    B = [tuple(map(int, input().split())) for _ in range(k)]
 
     # Solver
     solver = pywraplp.Solver.CreateSolver("SCIP")  # ["SCIP", "GLOP"]
