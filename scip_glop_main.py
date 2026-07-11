@@ -11,6 +11,8 @@ def main():
         return
     
     # Bien
+    x = {}
+    oo = solver.infinity()
     
     # Rang buoc
     
