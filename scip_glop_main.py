@@ -24,7 +24,7 @@ def main():
     status = solver.Solve()
     
     # Output
-    if status == pywraplp.Solver.OPTIMAL or status == pywraplp.Solver.FEASIBLE:
+    if status == pywraplp.Solver.OPTIMAL:
         print(int(solver.Objective().Value()))
         # print(int(x.solution_value()))
     else:
