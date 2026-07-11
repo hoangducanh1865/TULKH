@@ -6,13 +6,10 @@ def main():
     
     # Solver
     solver = pywraplp.Solver.CreateSolver("SCIP") # ["SCIP", "GLOP"]
-    if not solver:
-        print("SOLVER NOT OK")
-        return
     
     # Bien
+    # oo = solver.infinity()
     x = {}
-    oo = solver.infinity()
     
     # Rang buoc
     

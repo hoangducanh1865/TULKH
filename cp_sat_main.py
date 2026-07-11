@@ -7,13 +7,10 @@ def main():
     # Model & Solver
     model = cp_model.CpModel()
     solver = cp_model.CpSolver()
-    if not model or not solver:
-        print("MODEL/SOLVER NOT OK")
-        return
 
     # Bien
+    # oo = 10**9
     x = {}
-    oo = solver.infinity()
 
     # Rang buoc
 
