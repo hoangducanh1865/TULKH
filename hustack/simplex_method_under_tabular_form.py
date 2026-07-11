@@ -37,7 +37,7 @@ def main():
     status = solver.Solve()
     
     # Output
-    if status == pywraplp.Solver.OPTIMAL:
+    if status == pywraplp.Solver.OPTIMAL or status == pywraplp.Solver.FEASIBLE:
         print(n)
         for j in range(n):
             val = x[j].solution_value()
