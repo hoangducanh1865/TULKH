@@ -8,9 +8,6 @@ def main():
     
     # Solver 
     solver = pywraplp.Solver.CreateSolver("SCIP")
-    if not solver:
-        print("SOLVER NOT OK")
-        return
     
     # Bien x[i, j]
     x = {}
@@ -18,7 +15,7 @@ def main():
         for j in range(n):
             if i != j:
                 x[i, j] = solver.IntVar(0, 1, f"x_{i}_{j}")
-    
+
     # Bien MTZ: de loai bo cac chu trinh con
     u = {}
     for i in range(n):
