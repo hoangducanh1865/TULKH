@@ -36,7 +36,7 @@ def main():
         cnt = 0
         for j in range(N):
             cnt += X[i, j]
-        solver.Add(cnt <= Q[i])
+        solver.Add(cnt <= Q[i] * Y[i])
     
     # Rang buoc 3
     for i in range(M):
