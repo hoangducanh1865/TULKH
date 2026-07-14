@@ -7,6 +7,10 @@ def main():
     n, q = map(int, input().split())
     d = [list(map(int, input().split())) for _ in range(n)]
     Q = [tuple(map(int, input().split())) for _ in range(q)]
+    
+    if n == 1:
+        print(0)
+        return
 
     # Solver
     solver = pywraplp.Solver.CreateSolver("SCIP")  # ["SCIP", "GLOP"]
@@ -39,15 +43,15 @@ def main():
     for i in range(1, n):
         solver.Add(Y[i] >= 1)
         solver.Add(Y[i] <= n - 1)
-
-    # Rang buoc 3: Dinh i phai duoc tham truoc dinh j
-    for (i, j) in Q:
-        solver.Add(Y[i] + 1 <= Y[j])
-    
+        
     for i in range(1, n):
         for j in range(1, n):
             if i != j:
                 solver.Add(Y[i] - Y[j] + n * X[i, j] <= n - 1)    
+
+    # Rang buoc 3: Dinh i phai duoc tham truoc dinh j
+    for (i, j) in Q:
+        solver.Add(Y[i] + 1 <= Y[j])
         
     # Ham muc tieu
     F = 0
