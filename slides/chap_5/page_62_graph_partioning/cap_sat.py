@@ -32,7 +32,6 @@ def main():
     model.Add(cnt == n // 2)
     
     # Rang buoc 2
-    b = {}
     for j in range(m):
         (u, v, c) = e[j]
         
