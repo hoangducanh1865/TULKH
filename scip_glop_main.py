@@ -24,10 +24,10 @@ def main():
     # Output
     if status == pywraplp.Solver.OPTIMAL or status == pywraplp.Solver.FEASIBLE:
         # print(int(x.solution_value()))
-        print(int(solver.Objective().Value()))
+        print(round(solver.Objective().Value()))
     else:
         print("-1")
-    
+
 
 if __name__ == "__main__":
     main()

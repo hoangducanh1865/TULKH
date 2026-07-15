@@ -59,7 +59,7 @@ def main():
     # Output
     if status == pywraplp.Solver.OPTIMAL or status == pywraplp.Solver.FEASIBLE:
         # print(int(x.solution_value()))
-        print(int(solver.Objective().Value()))
+        print(round(solver.Objective().Value()))
         tour = [0]
         cur = 0
         while True:

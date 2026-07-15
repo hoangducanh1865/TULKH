@@ -25,7 +25,7 @@ def main():
     # Output
     if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:
         # print(int(solver.Value(x)))
-        print(int(solver.ObjectiveValue()))
+        print(round(solver.ObjectiveValue()))
     else:
         print("-1")
 
